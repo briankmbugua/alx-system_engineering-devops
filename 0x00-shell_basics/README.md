@@ -1,1 +1,1 @@
-pwd
+pwd - print current workig directory
