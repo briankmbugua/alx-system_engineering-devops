@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#show attached ips
+
+# Get a list of all network interfaces
+interfaces=$(ifconfig | grep -Eo '^[a-zA-Z0-9]+')
+
+# Loop through the interfaces
+for interface in $interfaces
+do
+  # Get the IP address for the current interface
+  ip=$(ifconfig $interface | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+
+  # If the interface has an IP address, print it
+  if [[ -n $ip ]]; then
+    echo "$interface: $ip"
+  fi
+done
