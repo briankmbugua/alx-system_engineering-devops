@@ -12,3 +12,5 @@
 - -b 4096 specifies the number of bits in the key.
 - -f ~/.shh/school specifies the file name and location of the private eky
 - -N betty set the passpharase to betty
+# add another key pair
+to add another key pair edit the file .ssh/authorized_keys paste the other persons public key and save changes.
