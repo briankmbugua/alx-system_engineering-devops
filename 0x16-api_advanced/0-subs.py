@@ -1,25 +1,26 @@
 #!/usr/bin/python3
-import requests
-import sys
+"""
+number of subscribers
+"""
+
+from requests import get
 
 
 def number_of_subscribers(subreddit):
-    """returns number of subscribers for a subreddit"""
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {
-        "User-Agent": "python:number_of_subscribers (by u/briankinyanjui)"
-    }
+    """
+    returns the number of subscribers (not active users, total subscribers)
+    for a given subreddit
+    """
+    if subreddit is None or not isinstance(subreddit, str):
+        return (0)
 
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    user_agent = {'User-agent': 'Google Chrome Version 114.0.5735.198'}
+    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
+    response = get(url, headers=user_agent)
+    results = response.json()
 
-    if response.status_code == 200:
-        data = response.json()
-        subscribers = data['data']['subscribers']
-        return subscribers
-    else:
+    try:
+        return results.get('data').get('subscribers')
 
+    except Exception:
         return 0
-
-
-if __name__ == "__main__":
-    print(number_of_subscribers(sys.argv[1]))
