@@ -1,0 +1,1 @@
+Using strace to find server errors and automating debugging the server using puppet
